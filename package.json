@@ -1,11 +1,13 @@
 {
-  "name": "mylabeld",
+  "name": "next-nest-expo-starter",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "start": "turbo run start",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint:fix": "turbo run lint:fix",
+    "format": "prettier --write .",
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
@@ -13,8 +15,8 @@
     "turbo": "^2.9.16",
     "typescript": "5.9.2"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@11.4.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   }
 }
