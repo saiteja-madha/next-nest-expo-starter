@@ -8,7 +8,6 @@ This repository uses pnpm workspaces and Turbo to run tasks across the monorepo.
 - `apps/api` — NestJS backend (TypeScript)
 - `apps/web` — Next.js frontend (React, TypeScript)
 - `apps/mobile` — Expo / React Native app
-- `packages/eslint-config` — shared ESLint configs
 - `packages/typescript-config` — shared TypeScript configs
 
 ## Prerequisites
