@@ -1,64 +1,51 @@
 # next-nest-expo-starter
 
-Monorepo starter combining a Next.js web app, a NestJS API, and an Expo mobile app.
-This repository uses pnpm workspaces and Turbo to run tasks across the monorepo.
+Monorepo starter with Next.js web, NestJS API, and Expo mobile — pnpm workspaces + Turborepo.
 
-## Repository layout
+## Apps
 
-- `apps/api` — NestJS backend (TypeScript)
-- `apps/web` — Next.js frontend (React, TypeScript)
-- `apps/mobile` — Expo / React Native app
-- `packages/typescript-config` — shared TypeScript configs
+| App | Stack | Port |
+|-----|-------|------|
+| `apps/web` | Next.js 16, Tailwind CSS v4 | 3000 |
+| `apps/api` | NestJS 11, Express | 3001 |
+| `apps/mobile` | Expo / React Native | — |
 
 ## Prerequisites
 
-- Node.js (see `engines` in root `package.json`) — this repo declares `node >=24`.
-- pnpm (this repo uses `pnpm` as the package manager)
+- Node.js >= 24
+- pnpm 11
 
 ## Quick start
 
-Install dependencies at the repo root:
-
 ```bash
 pnpm install
+pnpm dev          # all apps
+pnpm build        # all apps
+pnpm lint         # Biome
+pnpm check-types  # TypeScript
 ```
 
-Run all development servers (uses Turbo):
+Or target a single app:
 
 ```bash
-pnpm dev
+pnpm --filter @repo/web dev
+pnpm --filter @repo/api dev
 ```
 
-Or run a single app from its folder:
+## Docker
+
+Production images for each app:
 
 ```bash
-cd apps/api && pnpm dev      # NestJS API (watch)
-cd apps/web && pnpm dev      # Next.js web (port 3000)
-cd apps/mobile && pnpm start # Expo mobile app
+# Web (Next.js standalone)
+docker build -t web -f apps/web/Dockerfile .
+
+# API (NestJS)
+docker build -t api -f apps/api/Dockerfile .
 ```
 
-You can also run package scripts from the repository root by using pnpm in a subfolder or pnpm filter selectors.
-
-## Build
-
-Build all packages/apps:
+Optional Turbo remote cache for CI/CD (Vercel):
 
 ```bash
-pnpm build
-```
-
-Build a single app:
-
-```bash
-cd apps/web && pnpm build
-cd apps/api && pnpm build
-```
-
-## Linting & type checking
-
-Run all linters and checks via Turbo:
-
-```bash
-pnpm lint
-pnpm check-types
+docker build --build-arg TURBO_TEAM=... --build-arg TURBO_TOKEN=... -f apps/web/Dockerfile .
 ```
